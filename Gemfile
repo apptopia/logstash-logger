@@ -5,6 +5,8 @@ gemspec
 
 gem 'json', :platform => :ruby_18
 
+gem 'redis'
+
 group :test do
   gem 'guard', '2.2.5'
   gem 'guard-rspec', '4.2.4'

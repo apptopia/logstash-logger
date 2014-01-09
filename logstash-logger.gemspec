@@ -8,7 +8,7 @@ Gem::Specification.new do |gem|
   gem.version       = LogStashLogger::VERSION
   gem.authors       = ["David Butler"]
   gem.email         = ["dwbutler@ucla.edu"]
-  gem.description   = %q{Ruby logger that writes directly to LogStash}
+  gem.description   = %q{Ruby logger that writes directly to LogStash or Redis list}
   gem.summary       = %q{LogStash Logger for ruby}
   gem.homepage      = "http://github.com/dwbutler/logstash-logger"
   gem.license       = "MIT"
@@ -17,8 +17,9 @@ Gem::Specification.new do |gem|
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
-  
+
   gem.add_runtime_dependency 'logstash-event', '~> 1.2'
+  gem.add_runtime_dependency 'redis', '~> 3.0.6'
   gem.add_development_dependency 'rspec'
   gem.add_development_dependency 'rake'
   gem.add_development_dependency 'wwtd'

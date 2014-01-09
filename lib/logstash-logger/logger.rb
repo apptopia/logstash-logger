@@ -5,8 +5,15 @@ class LogStashLogger < ::Logger
   LOGSTASH_EVENT_FIELDS = %w(@timestamp @tags @type @source @fields message).freeze
   HOST = ::Socket.gethostname
 
-  def initialize(host, port, socket_type=:udp)
-    super(::LogStashLogger::Socket.new(host, port, socket_type))
+  def initialize(host, port, transport = :udp, options = {})
+    case transport
+    when :udp, :tcp
+      super(::LogStashLogger::Socket.new(host, port, transport) )
+    when :redis
+      super(::LogStashLogger::Redis.new(host, port, options) )
+    else
+      raise "Unknown transport: #{transport}"
+    end
   end
 
   def add(severity, message = nil, progname = nil, &block)
