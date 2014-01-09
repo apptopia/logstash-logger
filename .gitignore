@@ -16,4 +16,5 @@ test/tmp
 test/version_tmp
 tmp
 *~
-.ruby-*
+.ruby-*.rspec
+.rspec
