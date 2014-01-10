@@ -12,8 +12,8 @@ class LogStashLogger::Redis
     @redis_list = options[:list] || 'logstash'
 
     buffer_initialize(
-                      max_items: options[:max_items] || 50,
-                      max_interval: options[:max_interval] || 5
+                      max_items: options[:max_items] || 1000,
+                      max_interval: options[:max_interval] || 3
                       )
   end
 
