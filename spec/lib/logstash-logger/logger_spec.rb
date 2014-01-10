@@ -85,7 +85,7 @@ describe LogStashLogger do
       redis.del 'logstash-list'
     end
 
-    let(:logger){ LogStashLogger.new host, port, :redis, list: 'logstash-list' }
+    let(:logger){ LogStashLogger.new host, port, :redis, list: 'logstash-list', max_items: 1 }
     let(:logdev) { logger.instance_variable_get(:@logdev) }
 
     it 'uses a LogStashLogger::Redis as the log device' do
