@@ -11,7 +11,8 @@ class LogStashLogger::Redis
 
   def write(event)
     begin
-      redis.rpush(@redis_list, "#{event.to_hash.to_json}")
+      message = event.to_hash
+      redis.rpush(@redis_list, "#{event.to_hash.to_s}")
     rescue => e
       warn "#{self.class} - #{e.class} - #{e.message}"
       close
