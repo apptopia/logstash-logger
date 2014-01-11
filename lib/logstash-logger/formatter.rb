@@ -30,7 +30,7 @@ class LogStashLogger::Formatter
 
     event['severity'] ||= severity
     #event.type = progname
-    event['source'] = HOST
+    event['host'] = HOST
 
     hash = event.to_hash
     hash['@timestamp'] = time.iso8601(3)
