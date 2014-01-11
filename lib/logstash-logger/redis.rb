@@ -19,6 +19,8 @@ class LogStashLogger::Redis
 
   def flush(messages, key, final = false)
     redis.rpush key, messages
+  rescue SocketError
+    messages.each{|m| STDOUT << "#{m}\n" }
   end
 
   def write(message)
