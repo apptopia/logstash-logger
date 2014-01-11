@@ -13,6 +13,16 @@ describe LogStashLogger do
       end
     end
 
+    context "when additional formatter specified" do
+      it "should use that formatter before converting message to logstash event" do
+        logger.formatter = proc do |severity, time, progname, message|
+          "<< #{message} >>"
+        end
+        logger.info "my message"
+        listener_event['message'].should == "<< my message >>"
+      end
+    end
+
     it 'takes a string message as input and writes a logstash event' do
       message = 'test'
 
