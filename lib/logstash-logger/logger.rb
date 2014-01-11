@@ -63,9 +63,7 @@ class LogStashLogger < ::Logger
 
     event['severity'] ||= severity
     #event.type = progname
-    if event['source'] == 'unknown'
-      event['source'] = HOST
-    end
+    event['source'] = HOST
 
     hash = event.to_hash
     hash['@timestamp'] = time.iso8601(3)
