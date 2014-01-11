@@ -16,25 +16,6 @@ class LogStashLogger < ::Logger
     end
   end
 
-  def add(severity, message = nil, progname = nil, &block)
-    severity ||= UNKNOWN
-    if severity < @level
-      return true
-    end
-    progname ||= @progname
-    if message.nil?
-      if block_given?
-        message = yield
-      else
-        message = progname
-        progname = @progname
-      end
-    end
-    @logdev.write(
-      format_message(format_severity(severity), Time.now, progname, message))
-    true
-  end
-
   def format_message(severity, time, progname, message)
     data = message
     if data.is_a?(String) && data[0] == '{'
