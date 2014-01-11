@@ -17,13 +17,13 @@ class LogStashLogger::Redis
                       )
   end
 
-  def flush(events, key, final = false)
-    redis.rpush key, events.collect(&:to_json)
+  def flush(messages, key, final = false)
+    redis.rpush key, messages
   end
 
-  def write(event)
+  def write(message)
     begin
-      buffer_receive event, @redis_list
+      buffer_receive message, @redis_list
     rescue => e
       warn "#{self.class} - #{e.class} - #{e.message}"
       close

@@ -67,6 +67,8 @@ class LogStashLogger < ::Logger
       event['source'] = HOST
     end
 
-    event
+    hash = event.to_hash
+    hash['@timestamp'] = time.iso8601(3)
+    hash.to_json
   end
 end

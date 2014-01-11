@@ -5,25 +5,25 @@ class LogStashLogger::Socket
     @type = socket_type
     @socket = nil
   end
-  
-  def write(event)
+
+  def write(message)
     begin
       connect unless @socket
-      
-      @socket.write("#{event.to_hash.to_json}\n")
+
+      @socket.write("#{message}\n")
     rescue => e
       warn "#{self.class} - #{e.class} - #{e.message}"
       close
       @socket = nil
     end
   end
-  
+
   def close
     @socket && @socket.close
   rescue => e
     warn "#{self.class} - #{e.class} - #{e.message}"
   end
-  
+
   private
   def connect
     @socket = case @type
